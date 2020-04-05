@@ -24,7 +24,7 @@ static int borderpx = 0;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
 */
-static char *shell = "/bin/sh";
+static char *shell = "/bin/bash";
 char *utmp = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
@@ -92,33 +92,41 @@ unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-        /* Solarized dark */
-        "#073642",  /*  0: black    */
-        "#dc322f",  /*  1: red      */
-        "#859900",  /*  2: green    */
-        "#b58900",  /*  3: yellow   */
-        "#268bd2",  /*  4: blue     */
-        "#d33682",  /*  5: magenta  */
-        "#2aa198",  /*  6: cyan     */
-        "#eee8d5",  /*  7: white    */
-        "#002b36",  /*  8: brblack  */
-        "#cb4b16",  /*  9: brred    */
-        "#586e75",  /* 10: brgreen  */
-        "#657b83",  /* 11: bryellow */
-        "#839496",  /* 12: brblue   */
-        "#6c71c4",  /* 13: brmagenta*/
-        "#93a1a1",  /* 14: brcyan   */
-        "#fdf6e3",  /* 15: brwhite  */
+        "#272822", /* hard contrast: #1d2021 / soft contrast: #32302f */
+	"#cc6666",
+	"#b5bd68",
+	"#927a4d",
+	"#81a2be",
+	"#85678f",
+	"#8abeb7",
+	"#c5c8c6",
+	"#737475",
+	"#cc6666",
+	"#90a959",
+	"#f0c674",
+	"#5f819d",
+	"#b294bb",
+	"#8abeb7",
+	"#ffffff",
+	[255] = 0,
+
+	/* more colors can be added after 255 to use with DefaultXX */
+	/* more colors can be added after 255 to use with DefaultXX */
+	"#272822", /* 258 -> bg */
+	"#c5c8c6", /* 259 -> fg */
+	"#c5c8c6", /* 256 -> cursor */
+	"#555555", /* 257 -> rev cursor*/
+        /* "#ebdbb2", /* 259 -> fg */
 };
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor
 */
-unsigned int defaultfg = 12;
-unsigned int defaultbg = 8;
-static unsigned int defaultcs = 14;
-static unsigned int defaultrcs = 15;
+unsigned int defaultfg = 257;
+unsigned int defaultbg = 256;
+static unsigned int defaultcs = 258;
+static unsigned int defaultrcs = 258;
 
 /*
 * Colors used, when the specific fg == defaultfg. So in reverse mode this
