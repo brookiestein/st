@@ -92,41 +92,46 @@ unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-        "#272822", /* hard contrast: #1d2021 / soft contrast: #32302f */
-	"#cc6666",
-	"#b5bd68",
-	"#927a4d",
-	"#81a2be",
-	"#85678f",
-	"#8abeb7",
-	"#c5c8c6",
-	"#737475",
-	"#cc6666",
-	"#90a959",
-	"#f0c674",
-	"#5f819d",
-	"#b294bb",
-	"#8abeb7",
-	"#ffffff",
+        /* 8 normal colors */
+	"#272822",
+	"red3",
+	"green3",
+	"yellow3",
+	"blue2",
+	"magenta3",
+	"cyan3",
+	"gray90",
+
+	/* 8 bright colors */
+	"gray50",
+	"red",
+	"green",
+	"yellow",
+	"#5c5cff",
+	"magenta",
+	"cyan",
+	"white",
+
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#272822", /* 258 -> bg */
-	"#c5c8c6", /* 259 -> fg */
-	"#c5c8c6", /* 256 -> cursor */
-	"#555555", /* 257 -> rev cursor*/
-        /* "#ebdbb2", /* 259 -> fg */
+	"#cccccc",
+	"#555555",
 };
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor
 */
-unsigned int defaultfg = 257;
-unsigned int defaultbg = 256;
-static unsigned int defaultcs = 258;
-static unsigned int defaultrcs = 258;
+unsigned int defaultfg = 7;
+unsigned int defaultbg = 0;
+static unsigned int defaultcs = 256;
+static unsigned int defaultrcs = 257;
+
+/* unsigned int defaultfg = 257; */
+/* unsigned int defaultbg = 256; */
+/* static unsigned int defaultcs = 258; */
+/* static unsigned int defaultrcs = 258; */
 
 /*
 * Colors used, when the specific fg == defaultfg. So in reverse mode this
