@@ -2,6 +2,12 @@
 --------------------
 st is a simple terminal emulator for X which sucks less.
 
+**Features**
+```
+1. This config allow you make scroll with Shift + Page Up/Down key combination.
+2. Also, you can do scroll with the mouse.
+3. You can paste the latest content saved into your clipboard with mouse's right click.
+```
 
 **Requirements**
 ------------
