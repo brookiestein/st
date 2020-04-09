@@ -1,13 +1,5 @@
 /* See LICENSE file for copyright and license details. */
 
-/* Scrollback settings */
-const unsigned int mousescrollincrement = 3;
-MouseKey mkeys[] = {
-        /* button               mask            function        argument */
-        { Button4,              XK_NO_MOD,      kscrollup,      {.i =  mousescrollincrement} },
-        { Button5,              XK_NO_MOD,      kscrolldown,    {.i =  mousescrollincrement} },
-};
-
 /*
  * appearance
  *
@@ -70,8 +62,9 @@ static unsigned int cursorthickness = 2;
 */
 static int bellvolume = 0;
 
-/* default TERM value */
-char *termname = "st-256color";
+/* Default TERM value */
+/* Changed, because it did not show very well the color palette on vim. Old value: st-256color */
+char *termname = "xterm-256color";
 
 /*
  * spaces per tab
@@ -128,11 +121,6 @@ unsigned int defaultbg = 0;
 static unsigned int defaultcs = 256;
 static unsigned int defaultrcs = 257;
 
-/* unsigned int defaultfg = 257; */
-/* unsigned int defaultbg = 256; */
-/* static unsigned int defaultcs = 258; */
-/* static unsigned int defaultrcs = 258; */
-
 /*
 * Colors used, when the specific fg == defaultfg. So in reverse mode this
 * will reverse too. Another logic would only make the simple feature too
@@ -175,9 +163,16 @@ static unsigned int defaultattr = 11;
 */
 static MouseShortcut mshortcuts[] = {
         /* button               mask            string */
-        /* Scrollback settings */
         { Button4,              XK_NO_MOD,      "\031" },
         { Button5,              XK_NO_MOD,      "\005" },
+};
+
+/* Scrollback settings */
+const unsigned int mousescrollincrement = 3;
+MouseKey mkeys[] = {
+        /* button               mask            function        argument */
+        { Button4,              XK_NO_MOD,      kscrollup,      {.i =  mousescrollincrement} },
+        { Button5,              XK_NO_MOD,      kscrolldown,    {.i =  mousescrollincrement} },
 };
 
 /* Internal keyboard shortcuts. */
