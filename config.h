@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=14:antialias=true:autohint=true";
-static int borderpx = 2;
+static char *font       = "mononoki Nerd Font Mono:pixelsize=14";
+static int borderpx     = 2;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -16,10 +16,10 @@ static int borderpx = 2;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/bash";
+static char *shell = "/bin/sh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
-char *scroll = "scroll";
+char *scroll = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
@@ -121,7 +121,6 @@ static const char *colorname[] = {
 	"#cccccc",
 	"#555555",
 };
-
 
 /*
  * Default colors (colorname index)
