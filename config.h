@@ -1,12 +1,19 @@
 /* See LICENSE file for copyright and license details. */
 
+/* externalpipe patch config */
+static char *openurlcmd[] = { "/bin/sh", "-c",
+        "regex='(((http|https|ftp|gopher)|mailto)[.:][^ >\"\t]*|www\\.[-a-z0-9.]+)[^ .,;\t>\">\\):]';\
+        url=$(grep -Po \"$regex\" | dmenu -l 10 -p \"Go:\") || exit;\
+        firefox --new-tab \"$url\"", "externalpipe", NULL
+};
+
 /*
  * appearance
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font       = "mononoki Nerd Font Mono:pixelsize=14";
-static int borderpx     = 2;
+static char *font = "mononoki Nerd Font Mono:pixelsize=14";
+static int borderpx = 2;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -122,6 +129,7 @@ static const char *colorname[] = {
 	"#555555",
 };
 
+
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
@@ -132,19 +140,26 @@ static unsigned int defaultcs = 256;
 static unsigned int defaultrcs = 257;
 
 /*
- * Default shape of cursor
- * 2: Block ("█")
- * 4: Underline ("_")
- * 6: Bar ("|")
- * 7: Snowman ("☃")
+ * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
+ * Default style of cursor
+ * 0: Blinking block
+ * 1: Blinking block (default)
+ * 2: Steady block ("█")
+ * 3: Blinking underline
+ * 4: Steady underline ("_")
+ * 5: Blinking bar
+ * 6: Steady bar ("|")
+ * 7: Blinking st cursor
+ * 8: Steady st cursor
  */
-static unsigned int cursorshape = 6;
+static unsigned int cursorstyle = 5;
+static Rune stcursor = 0x2603; /* snowman (U+2603) */
 
 /*
  * Default columns and rows numbers
  */
 
-static unsigned int cols = 120;
+static unsigned int cols = 130;
 static unsigned int rows = 33;
 
 /*
@@ -175,11 +190,9 @@ static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
-	/* { XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} }, */
-        { XK_NO_MOD,            Button4, ttysend,        {.s = "\033[1;3A"}, 0, -1 }, /* Universcroll patch */
+	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
 	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-	/* { XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} }, */
-        { XK_NO_MOD,            Button5, ttysend,        {.s = "\033[1;3B"}, 0, -1 }, /* Universcroll patch */
+	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
 
 /* Internal keyboard shortcuts. */
@@ -200,6 +213,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+        { TERMMOD,              XK_U,           externalpipe,   {.v = openurlcmd } }
 };
 
 /*
@@ -277,7 +291,7 @@ static Key key[] = {
 	{ XK_KP_Delete,     ControlMask,    "\033[3;5~",    +1,    0},
 	{ XK_KP_Delete,     ShiftMask,      "\033[2K",      -1,    0},
 	{ XK_KP_Delete,     ShiftMask,      "\033[3;2~",    +1,    0},
-	{ XK_KP_Delete,     XK_ANY_MOD,     "\033[P",       -1,    0},
+	{ XK_KP_Delete,     XK_ANY_MOD,     "\033[3~",       -1,    0},
 	{ XK_KP_Delete,     XK_ANY_MOD,     "\033[3~",      +1,    0},
 	{ XK_KP_Multiply,   XK_ANY_MOD,     "\033Oj",       +2,    0},
 	{ XK_KP_Add,        XK_ANY_MOD,     "\033Ok",       +2,    0},
@@ -345,7 +359,7 @@ static Key key[] = {
 	{ XK_Delete,        ControlMask,    "\033[3;5~",    +1,    0},
 	{ XK_Delete,        ShiftMask,      "\033[2K",      -1,    0},
 	{ XK_Delete,        ShiftMask,      "\033[3;2~",    +1,    0},
-	{ XK_Delete,        XK_ANY_MOD,     "\033[P",       -1,    0},
+	{ XK_Delete,        XK_ANY_MOD,     "\033[3~",       -1,    0},
 	{ XK_Delete,        XK_ANY_MOD,     "\033[3~",      +1,    0},
 	{ XK_BackSpace,     XK_NO_MOD,      "\177",          0,    0},
 	{ XK_BackSpace,     Mod1Mask,       "\033\177",      0,    0},
