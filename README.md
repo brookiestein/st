@@ -2,15 +2,6 @@
 --------------------
 st is a simple terminal emulator for X which sucks less.
 
-**Features**
-```
-Scroll using the mouse
-```
-
-**Note**
-To make scroll you will need to have installed the 'scroll' utility which can be found 
-[at](https://github.com/brookiestein/scroll)
-
 **Requirements**
 ------------
 In order to build st you need the Xlib header files.
@@ -23,8 +14,10 @@ the /usr/local namespace by default).
 
 Afterwards enter the following command to build and install st:
 
+Take special care while patching st, some patches could give you errors.
+So you would need to patch them manually.
 ```
-for i in $(ls -1 patches/); do patch -i patches/$i; done
+patch -p1 < st-patch # Use this syntax for each patch.
 make clean install
 ```
 
