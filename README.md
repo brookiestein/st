@@ -14,10 +14,7 @@ the /usr/local namespace by default).
 
 Afterwards enter the following command to build and install st:
 
-Take special care while patching st, some patches could give you errors.
-So you would need to patch them manually.
 ```
-patch -p1 < st-patch # Use this syntax for each patch.
 make clean install
 ```
 
@@ -35,4 +32,4 @@ See the man page for additional details.
 Based on Aurélien APTEL <aurelien dot aptel at gmail dot com> bt source code.
 
 **Some screenshots**
-![](screenshots/1.png)
+![]()
